@@ -1,0 +1,43 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Variables */
+
+  @theme {
+  --color-lightHover: #fcf4ff;
+  --color-darkHover: #2a004a;
+  --color-darkTheme: #11001f;
+
+  --shadow-black: 4px 4px 0 #000;
+  --shadow-white: 4px 4px 0 #fff;
+
+  --font-outfit: "Outfit", sans-serif;
+  --font-ovo: "Ovo", serif
+}
+
+/* Font classes */
+
+
+/* Background color classes */
+/* .lightHover {
+  background-color: var(--color-lightHover);
+}
+
+.darkHover {
+  background-color: var(--color-darkHover);
+}
+
+.darkTheme {
+  background-color: var(--color-darkTheme);
+} */
+
+/* Box shadow classes */
+/* .shadow-black {
+  box-shadow: var(--shadow-black);
+}
+
+.shadow-white {
+  box-shadow: var(--shadow-white);
+} */
