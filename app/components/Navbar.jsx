@@ -19,7 +19,7 @@ const Navbar = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      if (scrollY > 50) {
+      if (window.scrollY > 50) {
         setIsScroll(true);
       } else {
         setIsScroll(false);
@@ -58,23 +58,22 @@ const Navbar = () => {
           />
         </a>
 
+        {/* Desktop Menu with Hover Animation */}
         <ul
           className={`hidden md:flex items-center gap-6 lg:gap-8 rounded-full px-12 py-3 ${
             isScroll ? "" : "shadow-sm bg-white/60"
           } `}
         >
-          {["Home", "About Me", "Services", "My Work", "Contact"].map(
-            (item) => (
-              <li key={item}>
-                <a
-                  className="font-Ovo px-4 py-1.5 rounded-full transition-all duration-300 hover:bg-white/30 hover:backdrop-blur-md hover:shadow-md"
-                  href={`#${item.toLowerCase().replace(" ", "")}`}
-                >
-                  {item}
-                </a>
-              </li>
-            ),
-          )}
+          {["Home", "About Me", "Services", "My Work", "Contact"].map((item) => (
+            <li key={item}>
+              <a
+                className="font-Ovo hover:-translate-y-1 duration-300 transition-all inline-block"
+                href={`#${item.toLowerCase().replace(" ", "")}`}
+              >
+                {item}
+              </a>
+            </li>
+          ))}
         </ul>
 
         <div className="flex items-center gap-4 lg:gap-6">
@@ -83,7 +82,7 @@ const Navbar = () => {
           </button>
           <a
             href="#contact"
-            className="hidden lg:flex items-center gap-3 px-10 py-2.5 border border-gray-500 rounded-full ml-4 font-Ovo"
+            className="hidden lg:flex items-center gap-3 px-10 py-2.5 border border-gray-500 rounded-full ml-4 font-Ovo hover:bg-gray-100 duration-300 transition-all"
           >
             Contact <Image src={assets.arrow_icon} alt="" className="w-3" />
           </a>
@@ -92,7 +91,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Sidebar Menu */}
+        {/* Sidebar Menu with Hover Animation */}
         <ul
           ref={sideMenuRef}
           className="flex md:hidden flex-col gap-4 py-20 px-10 fixed -right-64 top-0 bottom-0 w-64 z-50 h-screen bg-rose-50 transition duration-500 ease-in-out"
@@ -105,19 +104,17 @@ const Navbar = () => {
             />
           </div>
 
-          {["Home", "About Me", "Services", "My Work", "Contact"].map(
-            (item) => (
-              <li key={item}>
-                <a
-                  className="font-Ovo px-4 py-2 rounded-full transition-all duration-300 hover:bg-white/40 hover:backdrop-blur-md hover:shadow-md"
-                  onClick={closeMenu}
-                  href={`#${item.toLowerCase().replace(" ", "")}`}
-                >
-                  {item}
-                </a>
-              </li>
-            ),
-          )}
+          {["Home", "About Me", "Services", "My Work", "Contact"].map((item) => (
+            <li key={item}>
+              <a
+                className="font-Ovo text-lg hover:bg-white/40 backdrop-blur-md shadow-md duration-300 transition-all"
+                onClick={closeMenu}
+                href={`#${item.toLowerCase().replace(" ", "")}`}
+              >
+                {item}
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
     </>
