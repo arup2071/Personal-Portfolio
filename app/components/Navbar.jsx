@@ -107,7 +107,7 @@ const Navbar = () => {
           {["Home", "About Me", "Services", "My Work", "Contact"].map((item) => (
             <li key={item}>
               <a
-                className="font-Ovo text-lg hover:bg-white/40 backdrop-blur-md shadow-md duration-300 transition-all"
+                className="font-Ovo text-lg hover:bg-white/40 hover:backdrop-blur-md hover:shadow-md duration-300 transition-all"
                 onClick={closeMenu}
                 href={`#${item.toLowerCase().replace(" ", "")}`}
               >
