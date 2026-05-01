@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 
 const Navbar = () => {
   const [isScroll, setIsScroll] = useState(false);
-  const [active, setActive] = useState("home");
   const sideMenuRef = useRef();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -18,31 +17,15 @@ const Navbar = () => {
     setMenuOpen(false);
   };
 
-  // Scroll + Active Section Detection
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScroll(window.scrollY > 50);
-
-      const sections = ["home", "aboutme", "services", "mywork", "contact"];
-
-      sections.forEach((id) => {
-        const section = document.getElementById(id);
-        if (section) {
-          const top = section.offsetTop - 100;
-          const height = section.offsetHeight;
-
-          if (window.scrollY >= top && window.scrollY < top + height) {
-            setActive(id);
-          }
-        }
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", () => {
+      if (scrollY > 50) {
+        setIsScroll(true);
+      } else {
+        setIsScroll(false);
+      }
+    });
   }, []);
-
-  const navItems = ["Home", "About Me", "Services", "My Work", "Contact"];
 
   return (
     <>
@@ -75,61 +58,41 @@ const Navbar = () => {
           />
         </a>
 
-        {/* Desktop Menu */}
         <ul
           className={`hidden md:flex items-center gap-6 lg:gap-8 rounded-full px-12 py-3 ${
             isScroll ? "" : "shadow-sm bg-white/60"
-          }`}
+          } `}
         >
-          {navItems.map((item) => {
-            const id = item.toLowerCase().replace(" ", "");
-            return (
-              <li key={item} className="relative">
+          {["Home", "About Me", "Services", "My Work", "Contact"].map(
+            (item) => (
+              <li key={item}>
                 <a
-                  href={`#${id}`}
-                  className={`font-Ovo px-4 py-1.5 rounded-full transition-all duration-300 
-                  hover:bg-white/30 hover:backdrop-blur-lg hover:shadow-lg hover:scale-105 
-                  ${
-                    active === id
-                      ? "bg-white/40 backdrop-blur-lg shadow-md"
-                      : ""
-                  }`}
+                  className="font-Ovo px-4 py-1.5 rounded-full transition-all duration-300 hover:bg-white/30 hover:backdrop-blur-md hover:shadow-md"
+                  href={`#${item.toLowerCase().replace(" ", "")}`}
                 >
                   {item}
                 </a>
-
-                {/* Animated underline */}
-                <span
-                  className={`absolute left-1/2 -bottom-1 h-[2px] bg-black transition-all duration-300 ${
-                    active === id
-                      ? "w-6 -translate-x-1/2"
-                      : "w-0 -translate-x-1/2"
-                  }`}
-                ></span>
               </li>
-            );
-          })}
+            ),
+          )}
         </ul>
 
-        {/* Right Side */}
         <div className="flex items-center gap-4 lg:gap-6">
           <button>
             <Image src={assets.moon_icon} alt="" className="w-6" />
           </button>
-
           <a
             href="#contact"
-            className="hidden lg:flex items-center gap-3 px-10 py-2.5 border border-gray-500 rounded-full ml-4 font-Ovo transition-all duration-300 hover:scale-105 hover:bg-gray-100"
+            className="hidden lg:flex items-center gap-3 px-10 py-2.5 border border-gray-500 rounded-full ml-4 font-Ovo"
           >
             Contact <Image src={assets.arrow_icon} alt="" className="w-3" />
           </a>
-
           <button className="block md:hidden ml-3" onClick={openMenu}>
             <Image src={assets.menu_black} alt="" className="w-6" />
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Sidebar Menu */}
         <ul
           ref={sideMenuRef}
           className="flex md:hidden flex-col gap-4 py-20 px-10 fixed -right-64 top-0 bottom-0 w-64 z-50 h-screen bg-rose-50 transition duration-500 ease-in-out"
@@ -142,26 +105,19 @@ const Navbar = () => {
             />
           </div>
 
-          {navItems.map((item) => {
-            const id = item.toLowerCase().replace(" ", "");
-            return (
+          {["Home", "About Me", "Services", "My Work", "Contact"].map(
+            (item) => (
               <li key={item}>
                 <a
+                  className="font-Ovo px-4 py-2 rounded-full transition-all duration-300 hover:bg-white/40 hover:backdrop-blur-md hover:shadow-md"
                   onClick={closeMenu}
-                  href={`#${id}`}
-                  className={`font-Ovo px-4 py-2 rounded-full transition-all duration-300 
-                  hover:bg-white/30 hover:backdrop-blur-lg hover:shadow-lg
-                  ${
-                    active === id
-                      ? "bg-white/40 backdrop-blur-md shadow-md"
-                      : ""
-                  }`}
+                  href={`#${item.toLowerCase().replace(" ", "")}`}
                 >
                   {item}
                 </a>
               </li>
-            );
-          })}
+            ),
+          )}
         </ul>
       </nav>
     </>
